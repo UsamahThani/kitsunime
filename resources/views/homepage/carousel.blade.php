@@ -3,36 +3,21 @@
         <div class="splide" id="image-carousel">
             <div class="splide__track">
                 <ul class="splide__list">
-                    <li class="splide__slide">
-                        <div class="slide-wrapper">
-                            <img src="{{ asset('images/carousel/anime1.png') }}" alt="">
-                            <div class="gradient-overlay"></div>
-                            <div class="slide-content">
-                                <h2>Persona 5</h2>
-                                <p>Sub</p>
+                    @foreach ($recommendations as $rec)
+                        @php
+                            $entry = $rec['entry'][0];
+                        @endphp
+                        <li class="splide__slide">
+                            <div class="slide-wrapper">
+                                <img src="{{ $entry['images']['webp']['large_image_url'] }}" alt="{{ $entry['title'] }}">
+                                <div class="gradient-overlay"></div>
+                                <div class="slide-content">
+                                    <h2>{{ $entry['title'] }}</h2>
+                                    <p>{{ substr(ucfirst($rec['content']), 0, 200) }}</p>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                    <li class="splide__slide">
-                        <div class="slide-wrapper">
-                            <img src="{{ asset('images/carousel/anime2.jpg') }}" alt="">
-                            <div class="gradient-overlay"></div>
-                            <div class="slide-content">
-                                <h2>Demon Slayer</h2>
-                                <p>Some sub</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="splide__slide">
-                        <div class="slide-wrapper">
-                            <img src="{{ asset('images/carousel/anime3.jpg') }}" alt="">
-                            <div class="gradient-overlay"></div>
-                            <div class="slide-content">
-                                <h2>Some wallpaper</h2>
-                                <p>more sub</p>
-                            </div>
-                        </div>
-                    </li>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
             <div class="splide__arrows">
@@ -51,11 +36,13 @@
     </div>
 </div>
 
+
 <style>
     .splide__slide img {
         width: 100%;
         height: auto;
         object-fit: cover;
+        object-position: center;
     }
 
     #image-carousel {
